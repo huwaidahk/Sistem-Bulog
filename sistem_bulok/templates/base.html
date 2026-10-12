@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistem Bulok</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg shadow-sm custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-white" href="/">🌿 Sistem Bulok</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/warehouses">Gudang</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/goods">Barang</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/items">Items</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/suppliers">Supplier</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/consumers">Konsumen</a></li>
+        <li class="nav-item"><a class="nav-link text-white nav-link-custom" href="/transactions">Transaksi</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="alert alert-{{ category }} shadow-sm">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ambil semua elemen flash message
+    const alerts = document.querySelectorAll(".alert");
+
+    alerts.forEach(function(alert) {
+      setTimeout(function () {
+        alert.style.transition = "opacity 1s ease";
+        alert.style.opacity = "0";
+
+        setTimeout(() => alert.remove(), 1000);
+      }, 5000); 
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

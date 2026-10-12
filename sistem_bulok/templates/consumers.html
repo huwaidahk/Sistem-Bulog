@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="fw-bold text-success mb-4">
+    <i class="fa-solid fa-users me-2"></i> Konsumen
+</h2>
+
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="text-success mb-3">Tambah Konsumen Baru</h5>
+
+        <form method="POST" action="{{ url_for('consumers_view') }}" class="row g-3">
+            {{ form.hidden_tag() }}
+
+            <div class="col-md-5">
+                {{ form.nama.label(class="form-label fw-bold") }}
+                {{ form.nama(class="form-control", placeholder="Nama Konsumen") }}
+                {% for error in form.nama.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-5">
+                {{ form.alamat.label(class="form-label fw-bold") }}
+                {{ form.alamat(class="form-control", placeholder="Alamat Konsumen (opsional)") }}
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                {{ form.submit(class="btn btn-success w-100") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="text-success mb-3">Daftar Konsumen</h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nama Konsumen</th>
+                        <th>Alamat</th>
+                        <th>Waktu Dibuat</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for c in consumers %}
+                        <tr>
+                            <td>{{ c.nama }}</td>
+                            <td>{{ c.alamat or '-' }}</td>
+                            <td>{{ c.created_at.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center text-muted py-3">
+                                Belum ada konsumen.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

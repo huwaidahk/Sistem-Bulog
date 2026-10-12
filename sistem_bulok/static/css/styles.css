@@ -1,0 +1,248 @@
+body{background:#f7fdf7}
+.card{border-radius:12px}
+.navbar-brand{font-weight:700;color:#b8eebe !important}
+.btn-success{background:#2f8f3a;border-color:#2f8f3a}
+.list-group-item{border-radius:8px;margin-bottom:6px}
+
+.custom-navbar {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+
+.nav-link-custom {
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.nav-link-custom:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #e8f5e9 !important;
+}
+
+/* Card modern */
+.card {
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
+}
+
+.btn-success:hover {
+    background-color: #256628;
+    border-color: #1b5e20;
+}
+
+.alert {
+    border-radius: 10px;
+}
+
+
+.home-hero {
+    animation: fadeSlideUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    animation: popIn 1.2s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Subjudul fade delay */
+.hero-subtitle {
+    opacity: 0;
+    animation: fadeIn 1.6s ease forwards;
+    animation-delay: .4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hero-btn {
+    margin-top: 15px;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    transition: .25s ease;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: .7s;
+    opacity: 0;
+}
+
+.hero-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(46, 125, 50, 0.3);
+}
+
+.home-hero {
+    min-height: 75vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;    
+
+    background: linear-gradient(rgba(255,255,255,0.8), rgba(240,255,240,0.8));
+    border-radius: 20px;
+
+    padding: 40px;
+    animation: fadeSlideUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+
+/* ===== Dashboard Stat Cards ===== */
+
+.stat-card {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 14px;
+    border-left: 6px solid #2e7d32; /* Accent Hijau */
+    transition: 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* ===== Section Card Styling ===== */
+
+.list-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.title-section {
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(46, 125, 50, 0.2);
+    padding-bottom: 6px;
+}
+
+/* Hover effect for list items */
+.list-group-item {
+    transition: 0.2s ease;
+}
+
+.list-group-item:hover {
+    background: rgba(240, 255, 240, 0.7);
+}
+
+/* Badge styling */
+.badge {
+    font-size: 0.9rem;
+}
+
+/* Dashboard container spacing */
+.dashboard-container {
+    animation: fadeSlideUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+
+/* ===== FORM CARD ===== */
+.form-card {
+    border-left: 6px solid #2e7d32;
+    border-radius: 14px;
+}
+
+/* ===== WAREHOUSE CARD ===== */
+.warehouse-card {
+    border-radius: 14px;
+    transition: 0.25s ease;
+    border-left: 5px solid #2e7d32; /* aksen hijau */
+}
+
+.warehouse-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Maps style */
+.warehouse-map {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+/* Typography */
+.card-title {
+    font-size: 1.2rem;
+}
+
+/* Smooth fade animasi halaman */
+.row.g-4, .form-card {
+    animation: fadeSlideUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+
+/* ===== FORM CARD STYLE ===== */
+.form-card {
+    border-left: 6px solid #2e7d32;
+    border-radius: 14px;
+    animation: fadeSlideUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+/* ===== LIST ITEMS STYLE ===== */
+.list-item-hover {
+    transition: 0.25s ease;
+}
+
+.list-item-hover:hover {
+    background: rgba(240, 255, 240, 0.8); /* hijau muda */
+    transform: translateX(5px);
+}
+
+/* Badge tanggal */
+.badge {
+    font-size: 0.85rem;
+}
+
+/* Card list wrapper */
+.card {
+    border-radius: 14px;
+}
+
+/* Section appear animation */
+.card-body {
+    animation: fadeSlideUp 0.9s ease forwards;
+    opacity: 0;
+}

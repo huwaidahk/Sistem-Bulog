@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="fw-bold text-success mb-4">
+    <i class="fa-solid fa-money-bill-transfer me-2"></i> Transaksi
+</h2>
+
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+
+        <h5 class="text-success mb-3">Buat Transaksi Baru</h5>
+
+        <form method="POST" action="{{ url_for('transactions_view') }}" class="row g-3">
+            {{ form.hidden_tag() }}
+
+            <div class="col-md-3">
+                {{ form.jenis.label(class="form-label fw-bold") }}
+                {{ form.jenis(class="form-select") }}
+                {% for error in form.jenis.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-3">
+                {{ form.item_id.label(class="form-label fw-bold") }}
+                {{ form.item_id(class="form-select") }}
+                {% for error in form.item_id.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2">
+                {{ form.jumlah_karung.label(class="form-label fw-bold") }}
+                {{ form.jumlah_karung(class="form-control", placeholder="Jumlah karung") }}
+                {% for error in form.jumlah_karung.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2">
+                {{ form.total_harga.label(class="form-label fw-bold") }}
+                {{ form.total_harga(class="form-control", placeholder="Total harga") }}
+                {% for error in form.total_harga.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2">
+                {{ form.supplier_id.label(class="form-label fw-bold") }}
+                {{ form.supplier_id(class="form-select") }}
+            </div>
+
+            <div class="col-md-2">
+                {{ form.consumer_id.label(class="form-label fw-bold") }}
+                {{ form.consumer_id(class="form-select") }}
+            </div>
+
+            <div class="col-12 mt-2">
+                {{ form.submit(class="btn btn-success px-4") }}
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <h5 class="text-success mb-3">Daftar Transaksi</h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Jenis</th>
+                        <th>Item</th>
+                        <th>Jumlah</th>
+                        <th>Total Harga</th>
+                        <th>Supplier</th>
+                        <th>Konsumen</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for t in transactions %}
+                        <tr>
+                            <td>{{ t.id }}</td>
+                            <td>{{ t.jenis }}</td>
+                            <td>{{ t.item.type.nama_tipe if t.item and t.item.type else 'N/A' }}</td>
+                            <td>{{ t.jumlah_karung }}</td>
+                            <td>{{ '%.2f'|format(t.total_harga) }}</td>
+
+                            <td>
+                                {% if t.supplier %}
+                                    {{ t.supplier.nama_petani }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if t.consumer %}
+                                    {{ t.consumer.nama }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>{{ t.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-3">
+                                Belum ada transaksi.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

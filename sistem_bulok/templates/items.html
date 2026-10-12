@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="fw-bold text-success mb-4">
+    <i class="fa-solid fa-cubes me-2"></i> Items (Barang)
+</h2>
+
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="text-success mb-3">Tambah Item Baru</h5>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="row g-3">
+                <div class="col-md-3">
+                    {{ form.tipe_id.label(class="form-label fw-bold") }}
+                    {{ form.tipe_id(class="form-select") }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.berat_kg.label(class="form-label fw-bold") }}
+                    {{ form.berat_kg(class="form-control", placeholder="Berat (kg)") }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.jumlah_karung.label(class="form-label fw-bold") }}
+                    {{ form.jumlah_karung(class="form-control", placeholder="Jumlah karung") }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ form.grade.label(class="form-label fw-bold") }}
+                    {{ form.grade(class="form-control", placeholder="Grade (A/B)") }}
+                </div>
+
+                <div class="col-md-3">
+                    {{ form.warehouse_id.label(class="form-label fw-bold") }}
+                    {{ form.warehouse_id(class="form-select") }}
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                    {{ form.submit(class="btn btn-success px-4") }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <form method="GET" action="{{ url_for('items_view') }}" class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label text-success mb-3 fw-bold">Filter Grade</label>
+               <select name="grade" class="form-select" onchange="this.form.submit()">
+                    <option value="">Semua Grade</option>
+                    <option value="A" {% if filter_grade == 'A' %}selected{% endif %}>Grade A</option>
+                    <option value="B" {% if filter_grade == 'B' %}selected{% endif %}>Grade B</option>
+                </select>
+            </div>
+        </form>
+
+        <br>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title mb-3 text-success mb-3">Daftar Items</h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipe</th>
+                        <th>Berat (kg)</th>
+                        <th>Jumlah</th>
+                        <th>Grade</th>
+                        <th>Gudang</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for it in items %}
+                        <tr>
+                            <td>{{ it.id }}</td>
+                            <td>{{ it.type.nama_tipe if it.type else 'N/A' }}</td>
+                            <td>{{ it.berat_kg }}</td>
+                            <td>{{ it.jumlah_karung }}</td>
+                            <td>
+                                <span class="badge {% if it.grade == 'A' %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {{ it.grade }}
+                                </span>
+                            </td>
+                            <td>{{ it.warehouse.nama_gudang if it.warehouse else '-' }}</td>
+                            <td>{{ it.created_at.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-3">Belum ada item</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="fw-bold text-success mb-4">
+    <i class="fa-solid fa-wheat-awn me-2"></i> Supplier
+</h2>
+
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="text-success mb-3">Tambah Supplier Baru</h5>
+
+        <form method="POST" action="{{ url_for('suppliers') }}" class="row g-3">
+            {{ form.hidden_tag() }}
+
+            <div class="col-md-4">
+                {{ form.nama_petani.label(class="form-label fw-bold") }}
+                {{ form.nama_petani(class="form-control", placeholder="Nama Petani") }}
+                {% for error in form.nama_petani.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-4">
+                {{ form.asal_petani.label(class="form-label fw-bold") }}
+                {{ form.asal_petani(class="form-control", placeholder="Asal Petani") }}
+                {% for error in form.asal_petani.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2">
+                {{ form.jumlah_karung.label(class="form-label fw-bold") }}
+                {{ form.jumlah_karung(class="form-control", placeholder="Jumlah Karung") }}
+                {% for error in form.jumlah_karung.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                {{ form.submit(class="btn btn-success w-100") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="text-success mb-3">Daftar Supplier</h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nama</th>
+                        <th>Asal</th>
+                        <th>Jumlah Karung</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for s in suppliers %}
+                        <tr>
+                            <td>{{ s.nama_petani }}</td>
+                            <td>{{ s.asal_petani }}</td>
+                            <td>
+                                <span class="badge bg-success px-3">
+                                    {{ s.jumlah_karung }}
+                                </span>
+                            </td>
+                            <td>{{ s.created_at.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-3">
+                                Tidak ada data
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
